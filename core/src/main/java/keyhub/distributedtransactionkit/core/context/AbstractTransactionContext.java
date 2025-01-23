@@ -9,7 +9,7 @@ public abstract class AbstractTransactionContext implements KhTransactionContext
     protected final CompensationStore compensationStore;
     protected final OutboxStore outboxStore;
 
-    public AbstractTransactionContext() {
+    protected AbstractTransactionContext() {
         this.compensationStore = CompensationStore.of();
         this.outboxStore = OutboxStore.of();
     }

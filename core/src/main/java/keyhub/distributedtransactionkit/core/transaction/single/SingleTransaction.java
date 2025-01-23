@@ -5,9 +5,9 @@ import keyhub.distributedtransactionkit.core.transaction.KhTransaction;
 
 import java.util.function.Supplier;
 
-public interface SingleTransaction<T> extends KhTransaction {
+public interface SingleTransaction extends KhTransaction {
 
-    static <T> SimpleSingleTransaction<T> of(Supplier<T> transactionProcess, KhTransactionContext transactionContext) {
-        return SimpleSingleTransaction.of(transactionProcess, transactionContext);
+    static <T> SingleTransaction of(Supplier<T> transactionProcess, KhTransactionContext transactionContext) {
+        return new SimpleSingleTransaction<>(transactionProcess, transactionContext);
     }
 }

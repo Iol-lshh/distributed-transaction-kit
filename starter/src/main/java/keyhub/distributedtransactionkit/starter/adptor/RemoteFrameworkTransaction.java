@@ -7,7 +7,7 @@ import org.springframework.http.HttpMethod;
 
 import java.util.Map;
 
-public class RemoteFrameworkTransaction extends SingleFrameworkTransaction<Object> implements RemoteTransaction {
+public class RemoteFrameworkTransaction extends SingleFrameworkTransaction implements RemoteTransaction {
 
     protected RemoteFrameworkTransaction(RemoteTransaction innerTransaction) {
         super(innerTransaction);
@@ -15,7 +15,7 @@ public class RemoteFrameworkTransaction extends SingleFrameworkTransaction<Objec
 
     public static RemoteFrameworkTransaction of() {
         FrameworkTransactionContext context = FrameworkTransaction.getTransactionContext();
-        RemoteTransaction transaction = RemoteTransaction.of(context);
+        RemoteTransaction transaction = RemoteTransaction.from(context);
         return new RemoteFrameworkTransaction(transaction);
     }
 

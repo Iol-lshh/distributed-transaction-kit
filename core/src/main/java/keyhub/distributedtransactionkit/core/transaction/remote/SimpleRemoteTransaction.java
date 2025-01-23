@@ -24,20 +24,12 @@ public class SimpleRemoteTransaction extends AbstractRemoteTransaction {
     private Request request;
     Map<String, String> headers = new HashMap<>();
 
-    SimpleRemoteTransaction(KhTransactionContext transactionContext, ObjectMapper objectMapper) {
+    protected SimpleRemoteTransaction(KhTransactionContext transactionContext, ObjectMapper objectMapper) {
         super(transactionContext, objectMapper);
     }
 
-    SimpleRemoteTransaction(KhTransactionContext transactionContext) {
+    protected SimpleRemoteTransaction(KhTransactionContext transactionContext) {
         super(transactionContext);
-    }
-
-    public static SimpleRemoteTransaction of(KhTransactionContext transactionContext) {
-        return new SimpleRemoteTransaction(transactionContext);
-    }
-
-    public static SimpleRemoteTransaction of(KhTransactionContext transactionContext, ObjectMapper objectMapper) {
-        return new SimpleRemoteTransaction(transactionContext, objectMapper);
     }
 
     @Builder @AllArgsConstructor @NoArgsConstructor @Getter
@@ -104,7 +96,7 @@ public class SimpleRemoteTransaction extends AbstractRemoteTransaction {
 
     @Override
     public Result resolve() throws KhTransactionException {
-        try{
+        try {
             String targetUrl = generateParameterQuery();
             WebClient webClient = WebClient.create();
             var requestSpec = generateRequestSpec(webClient, targetUrl);
@@ -114,8 +106,8 @@ public class SimpleRemoteTransaction extends AbstractRemoteTransaction {
             this.rawResult = objectMapper.readValue(jsonResponse, Object.class);
             storeCompensation();
             storeOutbox();
-        } catch (Throwable exception) {
-            this.exception = new KhTransactionException(transactionId, exception);
+        } catch (Exception e) {
+            this.exception = new KhTransactionException(transactionId, e);
         }
         return Result.from(this);
     }

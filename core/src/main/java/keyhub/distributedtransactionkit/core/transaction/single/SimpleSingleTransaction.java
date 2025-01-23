@@ -10,6 +10,11 @@ public class SimpleSingleTransaction<T> extends AbstractSingleTransaction<T> {
 
     private final Supplier<T> transactionProcess;
 
+    protected SimpleSingleTransaction(Supplier<T> transactionProcess, KhTransactionContext transactionContext) {
+        super(transactionContext);
+        this.transactionProcess = transactionProcess;
+    }
+
     @Override
     public SimpleSingleTransaction.Result<T> resolve() throws KhTransactionException {
         try {
@@ -20,15 +25,6 @@ public class SimpleSingleTransaction<T> extends AbstractSingleTransaction<T> {
         } catch (Exception e) {
             throw new KhTransactionException(transactionId, e);
         }
-    }
-
-    public SimpleSingleTransaction(Supplier<T> transactionProcess, KhTransactionContext transactionContext) {
-        super(transactionContext);
-        this.transactionProcess = transactionProcess;
-    }
-
-    public static <T> SimpleSingleTransaction<T> of(Supplier<T> transactionProcess, KhTransactionContext transactionContext) {
-        return new SimpleSingleTransaction<>(transactionProcess, transactionContext);
     }
 
     public static class Result<T> implements KhTransaction.Result<T> {

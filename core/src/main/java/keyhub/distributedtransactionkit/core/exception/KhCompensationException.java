@@ -3,8 +3,11 @@ package keyhub.distributedtransactionkit.core.exception;
 import keyhub.distributedtransactionkit.core.transaction.TransactionId;
 
 public class KhCompensationException extends Exception {
-    TransactionId transactionId;
+    private final transient TransactionId transactionId;
 
+    public TransactionId getTransactionId() {
+        return transactionId;
+    }
     public KhCompensationException(TransactionId transactionId) {
         this.transactionId = transactionId;
     }

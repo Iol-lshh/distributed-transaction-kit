@@ -9,9 +9,9 @@ import org.springframework.http.HttpMethod;
 import java.util.List;
 import java.util.Map;
 
-public interface RemoteTransaction extends SingleTransaction<Object> {
+public interface RemoteTransaction extends SingleTransaction {
 
-    static RemoteTransaction of(KhTransactionContext transactionContext){
+    static RemoteTransaction from(KhTransactionContext transactionContext){
         return new SimpleRemoteTransaction(transactionContext);
     }
 
