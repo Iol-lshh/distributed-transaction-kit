@@ -20,8 +20,6 @@ public interface RemoteTransaction extends SingleTransaction<Object> {
     }
 
     interface Result extends KhTransaction.Result<Object> {
-        Object get();
-        <T> T get(Class<T> returnType);
         <T> List<T> list(Class<T> returnType);
     }
 

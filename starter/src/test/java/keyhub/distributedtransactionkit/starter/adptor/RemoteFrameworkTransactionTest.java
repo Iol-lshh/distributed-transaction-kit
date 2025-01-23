@@ -495,7 +495,7 @@ class RemoteFrameworkTransactionTest {
 
         @Test
         void 종합Transaction_동작() throws KhTransactionException {
-            String utdMessage = "It will outbox";
+            String utdMessage = "It will transact outbox";
             String utdJson = "{\"message\": \"" + utdMessage +"\"}";
             String outboxMessage = "It's outbox!";
             String outboxJson = "{\"message\": \"" + outboxMessage +"\"}";
